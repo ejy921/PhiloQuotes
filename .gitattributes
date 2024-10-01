@@ -1,0 +1,6 @@
+# Automatically normalize line endings
+* text=auto
+
+# Specific line ending settings for Python and shell scripts
+*.py text eol=lf
+*.sh text eol=lf
