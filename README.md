@@ -4,7 +4,7 @@
    ```bash
    git clone https://github.com/ejy921/PhiloQuotes.git
 
-cd PhiloQuotes.git
+cd PhiloQuotes
 python -m venv venv
 
 venv\Scripts\activate
