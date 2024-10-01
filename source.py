@@ -28,18 +28,6 @@ other_characteristics = {
     "Uplifting": [0, 1, 0],
 }
 
-# Load data
-with open('quotes.json', 'r') as f:
-  quotes_data = json5.load(f)
-
-# Initialize likes/dislikes for each quote
-likes_dislikes = {quote['_id']: {'rating': 0} for quote in quotes_data}
-
-def like(item):
-  if item in likes_dislikes:
-    likes_dislikes[item]['rating'] += 1
-  else:
-    print(f"Item '{item}' not found.")
 feature_vectors = []
 quote_texts = []
 
@@ -69,9 +57,18 @@ for text, vector in zip(quote_texts, feature_vectors):
   print(f"Quote: {text}\nFeature Vector: {vector}\n")
 
     
+# Load data
+with open('quotes.json', 'r') as f:
+  quotes_data = json5.load(f)
 
+# Initialize likes/dislikes for each quote
+likes_dislikes = {quote['_id']: {'rating': 0} for quote in quotes_data}
 
-
+def like(item):
+  if item in likes_dislikes:
+    likes_dislikes[item]['rating'] += 1
+  else:
+    print(f"Item '{item}' not found.")
 
 def dislike(item):
   if item in likes_dislikes:
