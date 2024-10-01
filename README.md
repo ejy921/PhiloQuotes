@@ -6,8 +6,8 @@
 
 cd PhiloQuotes
 
-python -m venv venv
+python -m venv PhiloQuotes-Env
 
-venv\Scripts\activate
+PhiloQuotes-Env\Scripts\activate
 
 pip install -r requirements.txt
