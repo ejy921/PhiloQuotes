@@ -31,6 +31,10 @@ other_characteristics = {
 feature_vectors = []
 quote_texts = []
 
+# Load data
+with open('quotes.json', 'r') as f:
+  quotes_data = json5.load(f)
+
 # Iteration over each quote
 for quote in quotes_data:
   
@@ -56,10 +60,7 @@ print("Feature Vectors")
 for text, vector in zip(quote_texts, feature_vectors):
   print(f"Quote: {text}\nFeature Vector: {vector}\n")
 
-    
-# Load data
-with open('quotes.json', 'r') as f:
-  quotes_data = json5.load(f)
+
 
 # Initialize likes/dislikes for each quote
 likes_dislikes = {quote['_id']: {'rating': 0} for quote in quotes_data}
