@@ -28,37 +28,57 @@ other_characteristics = {
     "Uplifting": [0, 1, 0],
 }
 
-feature_vectors = []
-quote_texts = []
 
-# Load data
-with open('quotes.json', 'r') as f:
-  quotes_data = json5.load(f)
+class Quote:
+  def __init__(self, source, philosophy, quote_text, characteristics):
+    self.source = source
+    self.philosophy = philosophy
+    self.quote_text = quote_text
+    self.characteristics = characteristics.split(',') if characteristics else []
 
-# Iteration over each quote
-for quote in quotes_data:
+    def __repr__(self):
+      return f"Quote({self.quote_text})"
+
+
+class QuoteDataset:
+  def __init__(self, json_file):
+    self.quotes = []
+    self.central_characteristics = central_characteristics
+    self.other_characteristics = other_characteristics
+
+#   def load_quotes(self, file_path):
+#     with open('quotes.json', 'r') as f:
+#         quotes_data = json5.load(f)
+
+
+# feature_vectors = []
+# quote_texts = []
+
+
+# # Iteration over each quote
+# for quote in quotes_data:
   
-  feature_vector = [0] * len(central_characteristics)
+#   feature_vector = [0] * len(central_characteristics)
 
-  if 'characteristic' in quote:
-    characteristics = quote['characteristic'].split(',')
-    for char in characteristics:
-      if char in central_characteristics:
-        index = central_characteristics.index(char)
-        feature_vector[index] += 1
+#   if 'characteristic' in quote:
+#     characteristics = quote['characteristic'].split(',')
+#     for char in characteristics:
+#       if char in central_characteristics:
+#         index = central_characteristics.index(char)
+#         feature_vector[index] += 1
     
-      if char in other_characteristics:
-        feature_vector += np.array(other_characteristics[char])
+#       if char in other_characteristics:
+#         feature_vector += np.array(other_characteristics[char])
 
-    feature_vector = np.array(feature_vector)
-    feature_vectors.append(feature_vector)
-    quote_texts.append(quote['quote'])
+#     feature_vector = np.array(feature_vector)
+#     feature_vectors.append(feature_vector)
+#     quote_texts.append(quote['quote'])
 
-feature_vectors = np.array(feature_vectors)
+# feature_vectors = np.array(feature_vectors)
 
-print("Feature Vectors")
-for text, vector in zip(quote_texts, feature_vectors):
-  print(f"Quote: {text}\nFeature Vector: {vector}\n")
+# print("Feature Vectors")
+# for text, vector in zip(quote_texts, feature_vectors):
+#   print(f"Quote: {text}\nFeature Vector: {vector}\n")
 
 
 
