@@ -6,6 +6,8 @@
 
 cd PhiloQuotes
 
+If you don't have venv, type: pip install virtualenv
+
 python -m venv PhiloQuotes-Env
 
 PhiloQuotes-Env\Scripts\activate
