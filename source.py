@@ -1,6 +1,5 @@
 import json5
 import numpy as np
-from sklearn.neighbors import NearestNeighbors
 
 QUOTENUM = 128 # Number of quotes in json file.
 
@@ -28,7 +27,7 @@ other_characteristics = {
     "Uplifting": [0, 1, 0],
 }
 
-
+# Attributes of each Quote object
 class Quote:
   def __init__(self, source, philosophy, quote_text, characteristics):
     self.source = source
@@ -36,54 +35,57 @@ class Quote:
     self.quote_text = quote_text
     self.characteristics = characteristics.split(',') if characteristics else []
 
-    def __repr__(self):
-      return f"Quote({self.quote_text})"
+  def __repr__(self):
+    return f"Quote({self.quote_text})"
 
 
 class QuoteDataset:
-  def __init__(self, json_file):
+  def __init__(self):
     self.quotes = []
     self.central_characteristics = central_characteristics
     self.other_characteristics = other_characteristics
 
-#   def load_quotes(self, file_path):
-#     with open('quotes.json', 'r') as f:
-#         quotes_data = json5.load(f)
-
-
-# feature_vectors = []
-# quote_texts = []
-
-
-# # Iteration over each quote
-# for quote in quotes_data:
+  # load quotes in self.quotes array as Quote objects
+  def load_quotes(self):
+    with open('quotes.json', 'r') as f:
+        quotes_data = json5.load(f)
+        for item in quotes_data:
+          quote = Quote(
+            source=item['source'],
+            philosophy=item['philosophy'],
+            quote_text=item['quote'],
+            characteristics=item['characteristic']
+          )
+          self.quotes.append(quote)
   
-#   feature_vector = [0] * len(central_characteristics)
+  def feature_vectors(self):
+    feature_vectors = []
+    for quote in self.quotes:
+        # initialize feature vector containing zeros
+        feature_vector = [0] * len(self.central_characteristics)
 
-#   if 'characteristic' in quote:
-#     characteristics = quote['characteristic'].split(',')
-#     for char in characteristics:
-#       if char in central_characteristics:
-#         index = central_characteristics.index(char)
-#         feature_vector[index] += 1
-    
-#       if char in other_characteristics:
-#         feature_vector += np.array(other_characteristics[char])
+        # count for central characteristics
+        for char in quote.characteristics:
+          if char in self.central_characteristics:
+            index = self.central_characteristics.index(char)
+            feature_vector[index] += 1
 
-#     feature_vector = np.array(feature_vector)
-#     feature_vectors.append(feature_vector)
-#     quote_texts.append(quote['quote'])
+          if char in self.other_characteristics:
+            feature_vector += np.array(self.other_characteristics[char])
+        
+        feature_vectors.append(feature_vector)
 
-# feature_vectors = np.array(feature_vectors)
+    return np.array(feature_vectors)
 
-# print("Feature Vectors")
-# for text, vector in zip(quote_texts, feature_vectors):
-#   print(f"Quote: {text}\nFeature Vector: {vector}\n")
+quote_dataset = QuoteDataset()
+quote_dataset.load_quotes('quotes.json')
+feature_vectors = quote_dataset.feature_vectors()
 
-
+for quote, vector in zip(quote_dataset.quotes, feature_vectors):
+  print(f"Quote: {quote.quote_text}\nFeature Vector: {vector}\n")
 
 # Initialize likes/dislikes for each quote
-likes_dislikes = {quote['_id']: {'rating': 0} for quote in quotes_data}
+likes_dislikes = {quote['_id']: {'rating': 0} for quote in quote_dataset}
 
 def like(item):
   if item in likes_dislikes:
@@ -97,5 +99,5 @@ def dislike(item):
   else:
     print(f"Item '{item}' not found.")
 
-# Print the current state
-print(QUOTENUM)
+# # Print the current state
+# print(QUOTENUM)

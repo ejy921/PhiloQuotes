@@ -1,6 +1,5 @@
 import json5
 import numpy as np
-from sklearn.neighbors import NearestNeighbors
 
 class School:
   schools = [
