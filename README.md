@@ -4,15 +4,23 @@
    ```bash
    git clone https://github.com/ejy921/PhiloQuotes.git
 
-cd PhiloQuotes
+2. Go to project repository:
+   ```bash
+   cd PhiloQuotes
 
 If you don't have venv, type: pip install virtualenv
 
-python -m venv PhiloQuotes-Env
+3. Make a virtual environment:
+   ```bash
+   python -m venv Env
 
-PhiloQuotes-Env\Scripts\activate
+4. Activate the virtual environment:
+   ```bash
+   Env\Scripts\activate
 
-pip install -r requirements.txt
+5. Install libraries/dependencies:
+   ```bash
+   pip install -r requirements.txt
 
 
 ## API is available here
