@@ -1,5 +1,5 @@
 import numpy as np
-
+import json
 from features import central_characteristics, other_characteristics, central_philosophies, other_philosophies
 
 class Quote:
@@ -15,6 +15,18 @@ class QuoteDataset:
     def __init__(self, quotes):
         self.quotes = quotes
         self.feature_vectors = self.create_feature_vectors()
+
+    def load_quote(filepath):
+        with open(filepath, 'r') as file:
+            data = json.load(file)
+        quotes = []
+        for item in data:
+            quotes.append(Quote(
+                quote_text=item['quote_text'],
+                characteristics=item.get('characteristics', ''),
+                philosophy=item.get('philosophy', '')
+            ))
+        return quotes
 
     def create_feature_vectors(self):
         feature_vectors = []
