@@ -1,6 +1,6 @@
 import numpy as np
 import json
-from features import central_characteristics, other_characteristics, central_philosophies, other_philosophies
+from features import Features 
 
 class Quote:
     def __init__(self, quote_text, philosophy, characteristics):
@@ -16,14 +16,14 @@ class QuoteDataset:
         self.quotes = quotes
         self.feature_vectors = self.create_feature_vectors()
 
-    def load_quote(filepath):
+    def load_quotes(filepath):
         with open(filepath, 'r') as file:
             data = json.load(file)
         quotes = []
         for item in data:
             quotes.append(Quote(
-                quote_text=item['quote_text'],
-                characteristics=item.get('characteristics', ''),
+                quote_text=item['quote'],
+                characteristics=item.get('characteristics', ''), # if doesn't exist, return empty str
                 philosophy=item.get('philosophy', '')
             ))
         return quotes
@@ -32,25 +32,25 @@ class QuoteDataset:
         feature_vectors = []
         for quote in self.quotes:
             # make feature vector with len of central characteristics + schools
-            feature_vector = np.zeros(len(central_characteristics) + len(central_philosophies))
+            feature_vector = np.zeros(len(Features.central_characteristics) + len(Features.central_philosophies))
 
             # process characteristics
             for char in quote.characteristics:
-                if char in central_characteristics:
-                    index = central_characteristics.index(char)
+                if char in Features.central_characteristics:
+                    index = Features.central_characteristics.index(char)
                     feature_vector[index] += 1
-                if char in other_characteristics:
-                    char_vector = np.array(other_characteristics[char])
-                    feature_vector[:len(central_characteristics)] += char_vector
+                if char in Features.other_characteristics:
+                    char_vector = np.array(Features.other_characteristics[char])
+                    feature_vector[:len(Features.central_characteristics)] += char_vector
 
             # process schools
             for philosophy in quote.philosophy:
-                if philosophy in central_philosophies:
-                    index = len(central_characteristics) + central_philosophies.index(philosophy)
+                if philosophy in Features.central_philosophies:
+                    index = len(Features.central_characteristics) + Features.central_philosophies.index(philosophy)
                     feature_vector[index] += 1
-                if philosophy in other_philosophies:
-                    philosophy_vector = np.array(other_philosophies[philosophy])
-                    feature_vector[len(central_characteristics):] += philosophy_vector
+                if philosophy in Features.other_philosophies:
+                    philosophy_vector = np.array(Features.other_philosophies[philosophy])
+                    feature_vector[len(Features.central_characteristics):] += philosophy_vector
 
             feature_vectors.append(feature_vector)
 
