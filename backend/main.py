@@ -7,7 +7,7 @@ import os
 print("Current dir: ", os.getcwd())
 
 # load quotes into array
-quotes = QuoteDataset.load_quotes('quotes.json')
+quotes = QuoteDataset.load_quotes('backend/quotes.json')
 
 # initialize quote dataset
 quote_dataset = QuoteDataset(quotes)
