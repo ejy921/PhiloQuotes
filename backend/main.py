@@ -1,8 +1,10 @@
-from quote_engine import Quote, QuoteDataset
-from user import UserProfile
-from recommender import RecommenderSystem
-
+import sys
 import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from quote_engine import Quote, QuoteDataset
+from PhiloQuotes.backend.user import UserProfile
+from PhiloQuotes.backend.recommender import RecommenderSystem
 
 print("Current dir: ", os.getcwd())
 
