@@ -20,12 +20,13 @@ class RecommenderSystem:
         user_vector = self.user_profile.profile_vector.reshape(1, -1)
 
         # Get the top N similar quotes based on cosine similarity
+        # distances of the top n similar quotes, indices of these quotes in quote_dataset
         distances, indices = self.knn_model.kneighbors(user_vector, n_neighbors=top_n)
 
         recommendations = []
         for i in indices[0]:
-            quote = self.quote_dataset[i]
-            recommendations.append((quote.quote_text, distances[0][i])) # include distance between user and quote for context
+            quote = self.quote_dataset.quotes[i]
+            recommendations.append((quote.quote_text, quote.source, quote.philosophy, quote.characteristics, distances[0][i])) # include distance between user and quote for context
         
         return recommendations
     

@@ -3,8 +3,9 @@ import json
 from features import Features 
 
 class Quote:
-    def __init__(self, quote_text, philosophy, characteristics):
+    def __init__(self, quote_text, source, philosophy, characteristics):
         self.quote_text = quote_text
+        self.source = source
         self.characteristics = characteristics.split(',') if characteristics else []
         self.philosophy = philosophy.split(',') if philosophy else [] # ensure that it's a list
 
@@ -23,7 +24,8 @@ class QuoteDataset:
         for item in data:
             quotes.append(Quote(
                 quote_text=item['quote'],
-                characteristics=item.get('characteristics', ''), # if doesn't exist, return empty str
+                source = item.get('source', ''), # if doesn't exist, return empty str
+                characteristics=item.get('characteristics', ''), 
                 philosophy=item.get('philosophy', '')
             ))
         return quotes

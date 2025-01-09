@@ -20,24 +20,34 @@ recommender.fit_model()
 
 # Run a recommender loop
 for recommendation in recommender.recommend(top_n=len(quote_dataset.quotes)):
-    quote_text, distance = recommendation
-    print(f"\nRecommendation: {quote_text}\n(Similarity: {distance:.2f})")
+    quote_text, quote_source, quote_philosophy, quote_chars, distance = recommendation
+    print(f"\nRecommendation: {quote_text}\nPhilosopher: {quote_source}\nPhilosophy: {quote_philosophy}\nCharacteristics: {quote_chars}\n")
+    print(f"(Similarity: {distance:.2f})")
 
     feedback = input("Quote feedback:").strip().lower()
 
     if feedback == "quit":
         print("Goodbye, have a nice day")
         break
-    elif feedback == "yes":
-        # find vector for current quote
-        quote_vector = quote_dataset.feature_vectors[quote_dataset.quotes.index(Quote(quote_text, '', ''))]
-        recommender.user_profile.update_profile(quote_vector, feedback_type='like')
-        print("Liked")
-    elif feedback == "no":
-        quote_vector = quote_dataset.feature_vectors[quote_dataset.quotes.index(Quote(quote_text, '', ''))]
-        recommender.user_profile.update_profile(quote_vector, feedback_type='dislike')
-        print("Disliked")
+    elif feedback == "like":
+        # find current quote by finding matching quote in dataset
+        quote = next((q for q in quote_dataset.quotes if q.quote_text == quote_text), None)
+        if quote:
+            # find vector for current quote and update profile
+            quote_vector = quote_dataset.feature_vectors[quote_dataset.quotes.index(quote)]
+            recommender.user_profile.update_profile(quote_vector, feedback_type='like')
+            print("Liked")
+        else:
+            print("Error: quote not found.")
+    elif feedback == "dislike":
+        quote = next((q for q in quote_dataset.quotes if q.quote_text == quote_text), None)
+        if quote:
+            quote_vector = quote_dataset.feature_vectors[quote_dataset.quotes.index(quote)]
+            recommender.user_profile.update_profile(quote_vector, feedback_type='dislike')
+            print("Disliked")
+        else:
+            print("Error: quote not found.")
     else:
-        print("Please type either yes, no, or quit.")
+        print("Please type either like, dislike, or quit.")
 
 
