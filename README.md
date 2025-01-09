@@ -22,7 +22,6 @@ If you don't have venv, type: pip install virtualenv
    ```bash
    pip install -r requirements.txt
 
-
 ## API is available here
 https://philosophy-quotes-api.glitch.me
 
