@@ -1,0 +1,22 @@
+{
+    "manifest_version": 3,
+    "name": "PhiloQuotes",
+    "version": "1.0",
+    "description": "A Chrome Extension to display philosophical quotes",
+    "permissions": [
+      "storage"
+    ],
+    "background": {
+      "service_worker": "scripts.js"
+    },
+    "action": {
+      "default_popup": "chrome-extension/popup.html"
+    },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["chrome-extension/popup.js"]
+      }
+    ]
+  }
+  
