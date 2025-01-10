@@ -25,7 +25,7 @@ class QuoteDataset:
             quotes.append(Quote(
                 quote_text=item['quote'],
                 source = item.get('source', ''), # if doesn't exist, return empty str
-                characteristics=item.get('characteristics', ''), 
+                characteristics=item.get('characteristic', ''), 
                 philosophy=item.get('philosophy', '')
             ))
         return quotes
