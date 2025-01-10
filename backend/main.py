@@ -8,7 +8,7 @@ from recommender import RecommenderSystem
 
 print("Current dir: ", os.getcwd())
 
-# load quotes into array
+# load quotes into array 
 quotes = QuoteDataset.load_quotes('quotes.json')
 
 # initialize quote dataset
