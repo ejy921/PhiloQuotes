@@ -1,0 +1,11 @@
+{
+  "name": "PhiloQuotes",
+  "version": "1.0.0",
+  "description": "This is an extension to help get you your daily dose of Philosophy",
+  "manifest_version": 3,
+  "author": "JE YM AS KC",
+  "action": {
+      "default_popup": "index.html",
+      "default_title": "PhiloQuotes"
+  }
+}
