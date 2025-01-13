@@ -18,7 +18,7 @@ class QuoteDataset:
         self.feature_vectors = self.create_feature_vectors()
 
     def load_quotes(filepath):
-        with open(filepath, 'r') as file:
+        with open("backend/"+filepath, 'r') as file:
             data = json.load(file)
         quotes = []
         for item in data:

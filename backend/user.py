@@ -1,6 +1,6 @@
 import numpy as np
 
-from PhiloQuotes.backend.features import Features 
+from features import Features 
 
 class UserProfile:
   def __init__(self, initial_preferences=None):
