@@ -10,6 +10,7 @@ print("Current dir: ", os.getcwd())
 
 # load quotes into array 
 quotes = QuoteDataset.load_quotes('quotes.json')
+random.shuffle(quotes)
 
 # initialize quote dataset
 quote_dataset = QuoteDataset(quotes)
