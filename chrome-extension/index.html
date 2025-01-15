@@ -3,13 +3,86 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PhiloQuotes Notification</title>
+  <title>Quote Card</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .quote-card {
+      width: 350px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: center;
+    }
+    .quote-card h2 {
+      font-size: 18px;
+      margin-bottom: 20px;
+      color: #7d4ac7;
+    }
+    .quote-text {
+      font-style: italic;
+      font-size: 16px;
+      color: #333;
+      margin-bottom: 15px;
+    }
+    .author {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #555;
+    }
+    .tags {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 15px 0;
+    }
+    .tag {
+      font-size: 12px;
+      color: #fff;
+      background-color: #5e2fa4; /* Darker purple for contrast */
+      padding: 5px 10px;
+      border-radius: 20px;
+    }
+    .footer {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
+    .footer-icon {
+      font-size: 18px;
+      color: #7d4ac7;
+      cursor: pointer;
+    }
+    .footer-icon:hover {
+      color: #5e2fa4;
+    }
+  </style>
 </head>
 <body>
-  <div>
-    <h2>Quote goes here</h2>
-    <h2> Hyperlink to the authors wikiepedia?</h2>
+  <div class="quote-card">
+    <h2>Today's quote for [username]</h2>
+    <p class="quote-text">"The highest activity a human being can attain is learning for understanding, because to understand is to be free."</p>
+    <p class="author">Baruch Spinoza</p>
+    <div class="tags">
+      <div class="tag">Analytical</div>
+      <div class="tag">Philosophical</div>
+      <div class="tag">Hopeful</div>
+    </div>
+    <div class="footer">
+      <span class="footer-icon">🏠</span>
+      <span class="footer-icon">🔖</span>
+      <span class="footer-icon">👤</span>
+    </div>
   </div>
 </body>
-<script src = "script.js"></script>
 </html>
